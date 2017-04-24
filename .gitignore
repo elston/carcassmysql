@@ -1,0 +1,12 @@
+*.pyc
+*.pid
+*.pem
+
+.env
+.vagrant
+.logs
+__pycache__
+
+media
+
+certbot-auto.sh

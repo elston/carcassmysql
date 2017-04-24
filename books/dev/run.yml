@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  # router:
+  #     image: carcassmysql_router
+  #     expose:
+  #       - "80"    
+  #     ports:
+  #       - "80:80"
+  #     networks:
+  #       - netmain    
+  #     volumes:
+  #       - ../images/router/src:/router
+
+  storage:
+      image: mysql:5.7
+      expose:
+        - "3306"    
+      ports:
+        - "3306:3306"
+      networks:
+        - netmain
+      volumes:
+        - var_lib_mysql:/var/lib/mysql
+        - etc_mysql:/etc/mysql
+        - var_log_mysql:/var/log/mysql        
+      # .............................................
+      restart: always
+
+  mediatry:
+      image: carcassmysql_mediatry
+      tty: true      
+      expose:
+        - "8000"    
+      ports:
+        - "8000:8000"
+      networks:
+        - netmain   
+      depends_on:
+        - storage
+      environment:
+        - PROJECT=mediatry      
+        - WORKON_HOME=/mediatry/.env         
+        - DJANGO_SETTINGS_MODULE=settings.dev        
+      volumes:
+        - ../../images/mediatry/src:/mediatry
+      # .............................................        
+      restart: always        
+      command: /usr/local/bin/runserv.sh
+
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:
+
+networks:
+  netmain:
+    driver: bridge
+   
