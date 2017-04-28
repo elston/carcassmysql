@@ -7,6 +7,15 @@ services:
   #       dockerfile: Dockerfile.dev      
   #     network_mode: "host"  
 
+  storage:
+      build:
+        context: ../../images/storage
+        dockerfile: Dockerfile.dev      
+      network_mode: "host" 
+      volumes:
+        - var_lib_mysql:/var/lib/mysql
+        - etc_mysql:/etc/mysql
+        - var_log_mysql:/var/log/mysql        
 
   mediatry:
       build:
@@ -20,3 +29,7 @@ services:
       volumes:
         - ../../images/mediatry/src:/mediatry
 
+volumes:
+  var_lib_mysql:
+  etc_mysql:
+  var_log_mysql:

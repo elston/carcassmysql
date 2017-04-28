@@ -21,7 +21,9 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = []
+
 TIME_ZONE = 'Europe/Moscow'
+USE_TZ = True
 LANGUAGE_CODE = 'ru-RU'
 SITE_ID = 1
 USE_I18N = True

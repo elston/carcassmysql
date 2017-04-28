@@ -3,7 +3,7 @@ version: '3'
 services:
 
   storage:
-      image: mysql:5.7
+      image: carcassmysql_storage
       expose:
         - "3306"    
       ports:
@@ -14,8 +14,6 @@ services:
         - var_lib_mysql:/var/lib/mysql
         - etc_mysql:/etc/mysql
         - var_log_mysql:/var/log/mysql        
-      # .............................................
-      restart: always
 
 volumes:
   var_lib_mysql:
